@@ -36,7 +36,7 @@ export default function RootLayout({
         defer
       />
       <body className={inter.className}>
-        <main className="prose max-w-7xl w-full pb-8 dark:prose-invert mx-auto p-4 py-8">
+        <main className="prose max-w-5xl w-full pb-8 dark:prose-invert mx-auto p-4 py-8">
           {children}
         </main>
       </body>

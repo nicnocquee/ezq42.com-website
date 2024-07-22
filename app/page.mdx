@@ -1,66 +1,116 @@
-# EZQ42
+# EZQ42: Simplify Background Jobs for Serverless Functions
 
-The simple background job queue service for serverless functions like Next.js app running on Vercel.
+## Effortless Queue Management for Next.js and Vercel
 
-You just need to
+EZQ42 is the ultimate solution for developers seeking a streamlined background job queue service tailored for serverless functions, particularly those running Next.js applications on Vercel. Our service enables you to manage long-running tasks efficiently, enhancing your application's performance and user experience.
 
-- create an API end point or a Route handler in your Next.js app
-- implement the long running job logic in it.
-- Then you add the job to EZQ42 by specifying the URL to the end point with the data you want to pass to it.
-- EZQ42 will then call the end point along with the data.
+## Why Choose EZQ42?
 
-Check out the example project [here](https://github.com/nicnocquee/ezq42example).
+- **Simple Setup**: Get started in minutes with minimal configuration
+- **Scalable**: Handles your background jobs as your application grows
+- **Cost-Effective**: Free tier available, with affordable paid plans for higher demands
+- **Open Source**: Contribute to the project or run it locally
 
-# Usage
+## How It Works
 
-Free use (rate limit is 6 requests per minute):
+EZQ42 simplifies the process of managing background jobs in your serverless environment:
+
+1. **Create an API Endpoint**: Set up an API endpoint or Route handler in your Next.js app
+2. **Implement Job Logic**: Write your long-running job logic within the endpoint
+3. **Add Job to EZQ42**: Specify the URL of your endpoint and the data to be processed
+4. **Let EZQ42 Handle the Rest**: Our service will call your endpoint with the provided data, managing the queue and execution
+
+## Getting Started
+
+### Free Tier
+
+Ideal for small projects and testing, our free tier offers:
+
+- 6 requests per minute rate limit
+- No credit card required
+
+To use the free tier, simply make a POST request:
 
 ```bash
 curl -X POST "https://app.ezq42.com/api/v1/job" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "hi@example.com",
+    "email": "your@email.com",
     "payload": {
-      "url": <the URL to to run the job on>
+      "url": "https://your-app.com/api/your-job-endpoint"
     }
   }'
 ```
 
-Note: The `email` field is mandatory.
+**Note**: The `email` field is required for all requests.
 
-Paid use (rate limit is 120 requests per minute):
+### Paid Tier
 
-- Get the license key from [Gumroad](https://nicopr.gumroad.com/l/gphro)
-- Activate the key by sending a POST request to `https://app.ezq42.com/activate-key`
+For production applications and higher volume needs, our paid tier offers:
+
+- 120 requests per minute rate limit
+- Priority support
+- Advanced features (coming soon)
+
+To get started with the paid tier:
+
+1. Purchase a license key from [our Gumroad page](https://nicopr.gumroad.com/l/gphro)
+2. Activate your key:
 
 ```bash
 curl -X POST "https://app.ezq42.com/activate-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "hi@example.com",
-    "apiKey": <the license key>
+    "email": "your@email.com",
+    "apiKey": "your-license-key"
   }'
 ```
 
-- Use the license key in the `apiKey` field
+3. Use your activated key in job requests:
 
 ```bash
 curl -X POST "https://app.ezq42.com/api/v1/job" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "hi@example.com",
-    "apiKey": <the secret key>,
+    "email": "your@email.com",
+    "apiKey": "your-license-key",
     "payload": {
-      "url": <the URL to to run the job on>
+      "url": "https://your-app.com/api/your-job-endpoint"
     }
   }'
 ```
 
-# Development
+## Example Project
 
-- `npm install`
-- `cp .env.example .env`. Fill up the `.env` file. Set `SUPER_SECRET_KEY` to something to bypass rate limiting.
-- `docker-compose -f docker-compose.dev.yml up`
-- `npm run dev`
+See EZQ42 in action! Check out our [example project on GitHub](https://github.com/nicnocquee/ezq42example) to get a hands-on understanding of how to integrate EZQ42 into your Next.js application.
 
-Source code is available [here](https://github.com/nicnocquee/ezq42.com).
+## Why Background Job Queues Matter
+
+In the world of serverless computing, efficiently managing long-running tasks is crucial. EZQ42 addresses common challenges faced by developers:
+
+- **Timeout Limitations**: Overcome serverless function execution time limits
+- **Resource Management**: Optimize server resources by offloading intensive tasks
+- **Improved User Experience**: Keep your application responsive while processing heavy workloads
+- **Scalability**: Easily handle increased job volumes as your application grows
+
+## Use Cases
+
+EZQ42 is perfect for a wide range of applications, including:
+
+- **Email Campaigns**: Send bulk emails without blocking your main application
+- **Data Processing**: Handle large dataset operations asynchronously
+- **Report Generation**: Create complex reports without timing out
+- **Image and Video Processing**: Manage resource-intensive media tasks efficiently
+- **Scheduled Tasks**: Run periodic jobs without maintaining a dedicated server
+
+## Open Source
+
+Want to contribute or run EZQ42 locally? Follow these steps:
+
+1. Clone the repository: `git clone https://github.com/nicnocquee/ezq42.com.git`
+2. Install dependencies: `npm install`
+3. Set up environment variables: `cp .env.example .env` and fill in the required values
+4. Start the development environment: `docker-compose -f docker-compose.dev.yml up`
+5. Run the development server: `npm run dev`
+
+The full source code is available on [GitHub](https://github.com/nicnocquee/ezq42.com).
