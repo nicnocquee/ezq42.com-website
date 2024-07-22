@@ -1,4 +1,4 @@
-# EZQ42: Simplify Background Jobs for Serverless Functions
+# EZQ42: Simplify Background Jobs for Serverless Functions (beta)
 
 ## Effortless Queue Management for Next.js and Vercel
 
@@ -82,6 +82,28 @@ curl -X POST "https://app.ezq42.com/api/v1/job" \
 
 **Important: Please keep your license key private and do not share it with anyone or hard code it in your project code.**
 
+### Request Payload
+
+The request payload is a JSON object which should conform to the following zod schema:
+
+```typescript
+const requestSchema = z.object({
+  email: z.string().email(),
+  apiKey: z.string().optional(),
+  delay: z.number().int().nonnegative().default(0),
+  concurrency: z.number().int().positive().default(1),
+  payload: z.object({
+    url: z.string().url(),
+    method: z
+      .enum(["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"])
+      .optional()
+      .default("GET"),
+    headers: z.record(z.string()).optional(),
+    body: z.any().optional().optional(),
+  }),
+});
+```
+
 ## Example Project
 
 See EZQ42 in action! Check out our [example project on GitHub](https://github.com/nicnocquee/ezq42example) to get a hands-on understanding of how to integrate EZQ42 into your Next.js application.
@@ -119,4 +141,8 @@ The full source code is available on [GitHub](https://github.com/nicnocquee/ezq4
 
 ## Support
 
-If you have any questions or need assistance, please contact us at [hi@enico.fyi](mailto:hi@enico.fyi) using e-mail address you used to purchase your license key. Please also include your license key and any relevant details about your project.
+If you have any questions or need assistance, please contact us at [hi@nico.fyi](mailto:hi@nico.fyi) using e-mail address you used to purchase your license key. Please also include your license key and any relevant details about your project.
+
+---
+
+Made in Zürich, Switzerland by [Nico](https://nico.fyi).
